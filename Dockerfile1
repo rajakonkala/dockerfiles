@@ -1,0 +1,19 @@
+FROM ubuntu
+RUN apt-get -y update && apt-get -y upgrade
+RUN apt-get -y install unzip
+RUN apt-get -y install openjdk-8-jdk wget
+
+RUN wget http://www-us.apache.org/apachemirror/tomcat/tomcat-8/v8.5.35/bin/apache-tomcat-8.5.35-windows-x64.zip -O /tmp/apache-tomcat-8.5.35-windows-x64.zip
+RUN unzip /usr/local/tomcat/apache-tomcat-8.5.35-windows-x64.zip -d temp_for_zip_extract
+ADD tomcat-users.xml /opt/tomcat/conf/
+
+ENV CATALINA_HOME /opt/tomcat
+ENV PATH $PATH:$CATALINA_HOME/bin
+
+EXPOSE 8080
+EXPOSE 8009
+VOLUME "/opt/tomcat/webapps"
+WORKDIR /opt/tomcat
+
+# Launch Tomcat
+CMD ["/opt/tomcat/bin/catalina.sh", "run"]
