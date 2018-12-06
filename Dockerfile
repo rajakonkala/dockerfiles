@@ -4,6 +4,6 @@ RUN apt-get -y install openjdk-8-jdk wget
 
 
 
-CMD /usr/local/tomcat/bin/catalina.sh run
+CMD /usr/local/tomcat/bin/catalina.sh start
 #COPY /home/vmadmin/Desktop/project/javabuild/target/javabuild.war /usr/local/tomcat/webapps
-EXPOSE 8090
+EXPOSE 8000
